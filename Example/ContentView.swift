@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
-import ThemeFlow
+import SwiftUIThemeFlow
 
 struct ContentView: View {
-    body: some View {
+    var body: some View {
         Text("Hello, world!")
             .padding()
     }
