@@ -8,5 +8,9 @@
 import SwiftUI
 
 @MainActor public class ThemeViewModel: ObservableObject {
-    @Published var currentColorScheme: ColorScheme = .light
+    @Published public var palette: Palette
+    
+    public init(palette: Palette) {
+        self.palette = palette
+    }
 }
