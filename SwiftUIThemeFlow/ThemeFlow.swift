@@ -8,7 +8,6 @@
 import SwiftUI
 
 public struct ThemeFlow<Content: View>: View {
-    @Environment(\.colorScheme) var colorScheme
     @ObservedObject var viewModel: ThemeViewModel
     @ViewBuilder let content: () -> Content
 
@@ -19,13 +18,6 @@ public struct ThemeFlow<Content: View>: View {
 
     public var body: some View {
         content()
-            .environmentObject(viewModel)
-            .onAppear {
-                viewModel.currentColorScheme = colorScheme
-            }
-            .onChange(of: colorScheme) { newColorScheme in
-                viewModel.currentColorScheme = newColorScheme
-            }
             .environmentObject(viewModel)
     }
 }
