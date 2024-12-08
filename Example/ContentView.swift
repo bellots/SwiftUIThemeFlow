@@ -43,6 +43,7 @@ enum MyCustomTheme: String, Theme, CaseIterable {
                 .font(.largeTitle)
                 .padding(5)
                 .background(colorScheme == .light ? Color.green : Color.blue)
+                .bold()
         case .primitiveBoldTitleRounded:
             return MyCustomTheme.primitiveBoldTitle
                 .apply(to: view, colorScheme: colorScheme)

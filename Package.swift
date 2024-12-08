@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "SwiftUIThemeFlow",
     platforms: [
-            .iOS("14.0"),
+            .iOS("16.0"),
     ],
     products: [
             .library(
