@@ -6,14 +6,13 @@
 //
 
 import SwiftUI
-import SwiftUIThemeFlow
 
 enum MyCustomButton: String, Theme, ThemeWrapper, CaseIterable {
     case defaultButton
     case roundedButton
     
     
-    private func commonStyle<V: View>(to view: V, colorScheme: ColorScheme) -> any View {
+    private func commonStyle<V: View>(to view: V, colorScheme: ColorScheme, palette: Palette) -> any View {
         
         return view.padding(10)
             .foregroundColor(.white)
@@ -38,14 +37,14 @@ enum MyCustomButton: String, Theme, ThemeWrapper, CaseIterable {
         }
     }
     
-    private func customStyle<V: View>(to view: V, colorScheme: ColorScheme) -> any View {
-        return commonStyle(to: view, colorScheme: colorScheme)
+    private func customStyle<V: View>(to view: V, colorScheme: ColorScheme, palette: Palette) -> any View {
+        return commonStyle(to: view, colorScheme: colorScheme, palette: palette)
             .background(color(for: colorScheme))
             .cornerRadius(isRounded ? 20 : 0)
     }
     
-    func apply<V>(to view: V, colorScheme: ColorScheme) -> AnyView where V : View {
-        return AnyView(customStyle(to: view, colorScheme: colorScheme))
+    func apply<V>(to view: V, colorScheme: ColorScheme, palette: Palette) -> AnyView where V : View {
+        return AnyView(customStyle(to: view, colorScheme: colorScheme, palette: palette))
     }
 
 }

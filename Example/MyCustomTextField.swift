@@ -6,12 +6,11 @@
 //
 
 import SwiftUI
-import SwiftUIThemeFlow
 
 enum MyCustomTextField: String, Theme, ThemeWrapper, CaseIterable {
     case defaultTextField
     
-    func apply<V>(to view: V, colorScheme: ColorScheme) -> AnyView where V : View {
+    func apply<V>(to view: V, colorScheme: ColorScheme, palette: Palette) -> AnyView where V : View {
         switch self {
         case .defaultTextField:
             return AnyView(view

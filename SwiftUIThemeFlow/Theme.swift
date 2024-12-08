@@ -8,5 +8,5 @@
 import SwiftUI
 
 public protocol Theme {
-    func apply<V: View>(to view: V, colorScheme: ColorScheme) -> AnyView
+    func apply<V: View>(to view: V, colorScheme: ColorScheme, palette: Palette) -> AnyView
 }

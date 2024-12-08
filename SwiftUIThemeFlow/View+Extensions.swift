@@ -8,8 +8,8 @@
 import SwiftUI
 
 public extension View {
-    func themeable(_ theme: any Theme) -> some View {
-        self.modifier(ThemeModifier(theme: theme))
+    func themeable(_ theme: any Theme, palette: any Palette) -> some View {
+        self.modifier(ThemeModifier(theme: theme, palette: palette))
     }
 }
 
