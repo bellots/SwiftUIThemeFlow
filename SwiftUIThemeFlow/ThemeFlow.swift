@@ -9,15 +9,16 @@ import SwiftUI
 
 public struct ThemeFlow<Content: View>: View {
     @Environment(\.colorScheme) var colorScheme
-    @StateObject var viewModel = ThemeViewModel()
-    @ViewBuilder let content: Content
+    @ObservedObject var viewModel: ThemeViewModel
+    @ViewBuilder let content: () -> Content
 
-    init(content: Content) {
+    public init(themes: [any Theme], @ViewBuilder content: @escaping () -> Content) {
         self.content = content
+        self.viewModel = ThemeViewModel(themes: themes)
     }
-    
+
     public var body: some View {
-        content
+        content()
             .environmentObject(viewModel)
             .onAppear {
                 viewModel.currentColorScheme = colorScheme
