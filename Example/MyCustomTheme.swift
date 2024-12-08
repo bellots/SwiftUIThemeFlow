@@ -7,10 +7,11 @@
 import SwiftUI
 import SwiftUIThemeFlow
 
-enum MyCustomTheme: String, Theme, CaseIterable {
+enum MyCustomTheme: String, Theme, ThemeWrapper, CaseIterable {
     case primitiveTitle
     case primitiveBoldTitle
     case primitiveBoldTitleRounded
+    case primitiveItalicTitleStroke
     
     private func customStyle<V: View>(to view: V, colorScheme: ColorScheme) -> any View {
         switch self {
@@ -27,6 +28,11 @@ enum MyCustomTheme: String, Theme, CaseIterable {
             return MyCustomTheme.primitiveBoldTitle
                 .apply(to: view, colorScheme: colorScheme)
                 .cornerRadius(10)
+        case .primitiveItalicTitleStroke:
+            return MyCustomTheme.primitiveTitle
+                .apply(to: view, colorScheme: colorScheme)
+                .padding(5)
+                .background(Rectangle().stroke(Color.red))
         }
     }
 
