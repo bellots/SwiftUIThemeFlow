@@ -8,7 +8,7 @@
 import SwiftUI
 
 @MainActor public class ThemeViewModel: ObservableObject {
-    @Published var currentColorScheme: ColorScheme = .light
+    @Published public var currentColorScheme: ColorScheme = .light
     
     var themes: [any Theme] = []
     
@@ -19,12 +19,18 @@ import SwiftUI
     public func register(theme: any Theme) {
         themes.append(theme)
     }
+    
+   public func updateTheme(for colorScheme: ColorScheme) {
+        self.currentColorScheme = colorScheme
+        // Update the theme based on the color scheme if needed
+        // Here, you could switch themes based on the colorScheme if needed
+    }
 }
 
 protocol Themeable {}
 
 public protocol Theme {
-    func apply<V: View>(to view: V) -> AnyView
+    func apply<V: View>(to view: V, colorScheme: ColorScheme) -> AnyView
 }
 
 //public struct ThemeModifier: ViewModifier {
@@ -37,11 +43,12 @@ public protocol Theme {
 //}
 
 public struct ThemeModifier: ViewModifier {
+    @Environment(\.colorScheme) var colorScheme // Access the color scheme directly
     var theme: any Theme
 
     @ViewBuilder
     public func body(content: Content) -> some View {
-        theme.apply(to: content)
+        theme.apply(to: content, colorScheme: colorScheme)
     }
 }
 

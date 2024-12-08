@@ -12,9 +12,9 @@ public struct ThemeFlow<Content: View>: View {
     @ObservedObject var viewModel: ThemeViewModel
     @ViewBuilder let content: () -> Content
 
-    public init(themes: [any Theme], @ViewBuilder content: @escaping () -> Content) {
+    public init(viewModel: ThemeViewModel, @ViewBuilder content: @escaping () -> Content) {
         self.content = content
-        self.viewModel = ThemeViewModel(themes: themes)
+        self.viewModel = viewModel
     }
 
     public var body: some View {
@@ -26,6 +26,7 @@ public struct ThemeFlow<Content: View>: View {
             .onChange(of: colorScheme) { newColorScheme in
                 viewModel.currentColorScheme = newColorScheme
             }
+            .environmentObject(viewModel)
     }
 }
 
