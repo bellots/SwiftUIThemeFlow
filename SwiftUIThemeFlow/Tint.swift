@@ -7,7 +7,17 @@
 
 import SwiftUI
 
-public protocol Tint {
-    var light: Color { get }
-    var dark: Color { get }
+public struct Tint {
+    public var light: Color
+    public var dark: Color
+    
+    public init(light: Color, dark: Color) {
+        self.light = light
+        self.dark = dark
+    }
+    
+    public init(_ color: Color) {
+        self.light = color
+        self.dark = color
+    }
 }

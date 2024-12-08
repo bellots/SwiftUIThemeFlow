@@ -7,31 +7,48 @@
 import SwiftUI
 
 enum MyCustomTheme: String, Theme, ThemeWrapper, CaseIterable {
-    case primitiveTitle
-    case primitiveBoldTitle
-    case primitiveBoldTitleRounded
-    case primitiveItalicTitleStroke
+    case accentTitle
+    case contrastTitle
+    case accentBoldTitle
+    case accentBoldTitleRoundedFill
+    case accentBoldTitleRoundedStroke
+    case accentBoldLargeTitle
+    case accentItalicTitleStroke
     
     private func customStyle<V: View>(to view: V, colorScheme: ColorScheme, palette: Palette) -> any View {
         switch self {
-        case .primitiveTitle:
-            return view.foregroundColor(palette.primary.color(colorScheme: colorScheme))
-        case .primitiveBoldTitle:
-            return MyCustomTheme.primitiveTitle
+        case .contrastTitle:
+            return view.foregroundColor(palette.contrast.color(colorScheme: colorScheme))
+        case .accentTitle:
+            return view.foregroundColor(palette.accent.color(colorScheme: colorScheme))
+        case .accentBoldTitle:
+            return MyCustomTheme.accentTitle
+                .apply(to: view, colorScheme: colorScheme, palette: palette)
+                .padding(5)
+                .bold()
+        case .accentBoldTitleRoundedFill:
+            return MyCustomTheme.contrastTitle
+                .apply(to: view, colorScheme: colorScheme, palette: palette)
+                .foregroundColor(.white)
+                .padding(5)
+                .background(RoundedRectangle(cornerRadius: 10).fill(palette.accent.color(colorScheme: colorScheme)))
+                .cornerRadius(10)
+        case .accentBoldTitleRoundedStroke:
+            return MyCustomTheme.accentBoldTitle
+                .apply(to: view, colorScheme: colorScheme, palette: palette)
+                .padding(5)
+                .background(RoundedRectangle(cornerRadius: 10).stroke(palette.accent.color(colorScheme: colorScheme)))
+                .cornerRadius(10)
+        case .accentBoldLargeTitle:
+            return MyCustomTheme.accentBoldTitle
                 .apply(to: view, colorScheme: colorScheme, palette: palette)
                 .font(.largeTitle)
-                .padding(5)
-                .background(colorScheme == .light ? Color.green : Color.blue)
-                .bold()
-        case .primitiveBoldTitleRounded:
-            return MyCustomTheme.primitiveBoldTitle
-                .apply(to: view, colorScheme: colorScheme, palette: palette)
-                .cornerRadius(10)
-        case .primitiveItalicTitleStroke:
-            return MyCustomTheme.primitiveTitle
+        case .accentItalicTitleStroke:
+            return MyCustomTheme.accentTitle
                 .apply(to: view, colorScheme: colorScheme, palette: palette)
                 .padding(5)
-                .background(Rectangle().stroke(Color.red))
+                .background(Rectangle().stroke(palette.accent.color(colorScheme: colorScheme)))
+                .italic()
         }
     }
 

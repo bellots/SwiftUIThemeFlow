@@ -11,6 +11,13 @@ struct ContentView: View {
     @EnvironmentObject var themeViewModel: ThemeViewModel
     var body: some View {
         VStack {
+            HStack {
+                ForEach(PaletteEnum.allCases.indices, id: \.self) { index in
+                    Button(PaletteEnum.allCases[index].rawValue, action: {
+                        themeViewModel.palette = PaletteEnum.allCases[index].palette
+                    })
+                }
+            }
             ForEach(MyCustomTheme.allCases.indices, id: \.self) { index in
                 Text(MyCustomTheme.allCases[index].rawValue)
                     .style(MyCustomTheme.allCases[index], palette: themeViewModel.palette)
@@ -26,6 +33,7 @@ struct ContentView: View {
                     .style(MyCustomButton.allCases[index], palette: themeViewModel.palette)
             }
         }
+        .background(Color.gray.opacity(0.2))
     }
 }
 

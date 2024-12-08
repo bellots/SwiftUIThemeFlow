@@ -9,4 +9,5 @@ public protocol Palette {
     var primary: Tint { get }
     var secondary: Tint { get }
     var accent: Tint { get }
+    var contrast: Tint { get }
 }
